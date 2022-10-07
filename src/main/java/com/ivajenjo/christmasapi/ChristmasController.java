@@ -1,8 +1,10 @@
 package com.ivajenjo.christmasapi;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDate;
+import java.time.Month;
 
 @RestController
 public class ChristmasController {
@@ -14,11 +16,10 @@ public class ChristmasController {
 
     @GetMapping("/christmas")
     public String christmas() {
-        return "Happy Christmas!";
-    }
-
-    @GetMapping("/christmas/{name}")
-    public String christmas(@PathVariable String name) {
-        return "Happy Christmas " + name + "!";
+        boolean isChristmas = (LocalDate.now().getMonth() == Month.DECEMBER) && (LocalDate.now().getDayOfMonth() == 25);
+        if (isChristmas) {
+            return "Today is Christmas!";
+        }
+        return "Today is not Christmas";
     }
 }
